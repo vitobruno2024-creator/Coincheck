@@ -1,0 +1,20 @@
+ById("type").value,
+      year: document.getElementById("year").value,
+      front: await toBase64(front),
+      back: back ? await toBase64(back) : null
+    };
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    document.getElementById("result").textContent = data.report || data.error;
+  } catch (err) {
+    document.getElementById("result").textContent = "Something went wrong: " + err.message;
+  }
+  btn.disabled = false; btn.textContent = "Check for errors";
+});
+</script>
+</body>
+</html>
